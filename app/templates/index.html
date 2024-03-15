@@ -1,0 +1,549 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Sage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <!-- background: url('../static/backgrouond-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; -->
+    <style>
+        .content {
+            position: relative;
+        }
+
+        header {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 3rem;
+            width: 50rem;
+            margin-right: auto;
+            margin-left: auto;
+            align-items: center;
+            justify-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            color: aliceblue;
+        }
+
+        header>span:nth-child(1) {
+            font-size: 70px;
+            font-variant: small-caps;
+            letter-spacing: 3px;
+            border-bottom: 2px solid rgb(151, 147, 147);
+        }
+
+        header>span:nth-child(2) {
+            font-size: 20px;
+            font-variant: small-caps;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            /* background: linear-gradient(50deg, #ffffff, #ada5a5); 
+            background: linear-gradient(50deg, rgb(154, 243, 243), cyan);
+            */
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            color: #fff;
+        }
+
+
+        .search_box {
+            display: flex;
+            margin: auto;
+            justify-content: center;
+            align-items: baseline;
+            margin-top: 5rem;
+            margin-bottom: 3rem;
+            width: 80%;
+            height: 60px;
+            position: relative;
+            outline: 2px solid #ada5a5;
+            border-radius: 20px;
+            background-color: #fff;
+        }
+
+        /*background: linear-gradient(30deg, #c9c7c7, #ffffff);
+        */
+        .search_box>#inputs {
+            flex: 1;
+            display: flex;
+            justify-items: flex-end;
+            width: fit-content;
+            padding-left: 1rem;
+            border-left: 1px solid #ada5a5
+        }
+
+        .search_box input {
+            flex: 1;
+            border: none;
+            min-height: 100%;
+            max-width: 85%;
+            /*border-radius: 20px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;*/
+            padding-left: 20px;
+            font-size: large;
+        }
+
+        .search_box input:focus {
+            outline: none;
+        }
+
+        .search_box button {
+            position: absolute;
+            align-self: center;
+            margin-left: 85%;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .search_box button img {
+            width: 30px;
+        }
+
+        .trendingDivs>span {
+            font-size: 25px;
+            font-weight: 600;
+            color: #7e7979;
+            padding: 2.5rem 2.5rem;
+        }
+
+        .trendingDivs {
+            justify-self: center;
+            align-self: center;
+            margin: auto;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trendingDivs .row>div {
+            border: 1px solid rgb(199, 199, 199);
+            background-color: rgba(250, 247, 247, 0.85);
+            border-radius: 10px;
+        }
+
+        .trendingDivs img {
+            margin-left: auto;
+            padding: 20px;
+        }
+
+        #resultList {
+            justify-content: center;
+        }
+
+        #resultList img {
+            height: 250px;
+            width: fit-content;
+            object-fit: contain;
+            align-self: center;
+        }
+
+        /* background: rgb(224, 157, 33);*/
+        #searchCategory {
+            outline: 2px solid #ada5a5;
+            min-height: 100%;
+            border-radius: 20px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            padding-left: 20px;
+            font-size: large;
+            padding-right: 10px;
+            outline: none;
+            width: 150px;
+        }
+
+        .video-wrap {
+            z-index: -100;
+        }
+
+        .custom-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        div#resultList>div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #destSelect,
+        #sourceSelect {}
+
+        #scrapMethod {
+            display: flex;
+            background: #dbdbdb;
+            flex-wrap: wrap;
+            width: fit-content;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            border-radius: 10px;
+        }
+
+        #scrapMethod select {
+            max-width: fit-content;
+            background: #dbdbdb;
+        }
+    </style>
+    <!-- #scrapMethod > span{
+        color: rgb(222, 227, 227);
+    } -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<!-- font-size: 25px; -->
+
+
+<body>
+
+    <header>
+        <span>Shop Sage<span class="text-secondary">.</span>com</span>
+        <span>Search for cheapest deals</span>
+    </header>
+
+    <!-- 
+    <main></main>
+    <footer></footer> -->
+    <!-- <div class="video-background">
+        <video autoplay loop muted>
+            <source src="https://giant.gfycat.com/ShowyVacantHippopotamus.mp4" type="video/mp4">
+        </video>
+    </div> -->
+    <main class="content">
+
+        <!-- <button class="btn btn-primary" id="testBtn">test</button> -->
+        <div id="scrapMethod">
+            <span style="color: black;">Scrapping Engine : </span>
+            <select name="" id="scrapMethodSelect" class="ms-5 form-select">
+                <option value="selenium">Selenium only</option>
+                <option value="yolo">Selenium with Yolo v8 Modal</option>
+            </select>
+        </div>
+        <form action="" id="searchForm" method="post">
+            <span class="search_box">
+                <select class="form-select" name="category" id="searchCategory">
+                    <option value="electronics">Electronics</option>
+                    <option value="grocery">Grocery</option>
+                    <!-- <option value="flights">Flights</option> -->
+                    <option value="flights">Flights</option>
+                    <!-- <option value="cinemas">Cinemas</option> -->
+                </select>
+                <div id="inputs">
+                    <!-- <input type="text" name="searchInp" id="search" placeholder="Search anything...."> -->
+                    <input type="text" name="search" id="search" placeholder="Search anything....">
+                </div>
+                <button id="searchSubmitBtn" type="submit">
+                    <img src="{% static '/images/icons/search.png' %}" alt="">
+                </button>
+            </span>
+            <!-- {% csrf_token %} -->
+        </form>
+        <div id="resultList" class="container-fluid row m-auto">
+
+        </div>
+
+    </main>
+    <div class="video-wrap">
+        <video autoplay="" loop="" muted="" class="custom-video" poster="">
+            <!-- <source src="videos/video.mp4" type="video/mp4"> -->
+            <source src="{% static '/videos/video.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+    <script src="https://kit.fontawesome.com/5a981e61cb.js" crossorigin="anonymous"></script>
+    <script>
+
+        function arraysAreEqual(arr1, arr2) {
+            if (arr1.length !== arr2.length) {
+                return false;
+            }
+
+            return arr1.every((value, index) => value === arr2[index]);
+        }
+
+        // Get all elements in the DOM
+        var elements = document.querySelectorAll("main *");
+        let texts = []
+        let original
+        temp = ''
+        // Iterate over each element
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            // Get the computed font size
+            var computedFontSize = parseInt(window.getComputedStyle(element).fontSize);
+
+
+            element.style.textDecoration = 'none';
+            element.style.color = 'black';
+
+            // finding the element with font size greater than 30px
+            if (computedFontSize > 30) {
+                text = element.textContent
+                var text = text.split('\n')
+                arr = []
+                text = text.map((elem, i) => (elem = elem.trim()))
+                text = text.filter(elem => (elem != ""))
+                let flag = false
+                for (index in texts) {
+                    if (arraysAreEqual(text, texts[index])) {
+                        console.log("Same as previous element")
+                        flag = true
+                        break
+                    }
+                }
+                /*if(flag) {
+                    continue
+                }*/
+                console.log(element)
+                element.style.fontSize = '18px';
+                console.log(text);
+                texts.push(text)
+                console.log(text == temp)
+                temp = text
+            }
+        }
+        console.log(texts.length)
+
+        // Get the CSRF token from the cookie
+        function getCSRFToken() {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, 'csrftoken='.length) === 'csrftoken=') {
+                        cookieValue = decodeURIComponent(cookie.substring('csrftoken='.length));
+                        break;
+                    }
+                }
+            }
+            // console.log(cookieValue)
+            return cookieValue;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'dbData' %}",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
+            },
+            success: res => {
+                console.log("success")
+                console.log(res)
+
+                $(this).disabled = false
+
+                var result = res.result.reverse()
+                var resultListElement = $("#resultList");
+                $('#resultList').html("")
+                if (result.length > 0)
+                    $('#resultList').append("<h3 class='text-secondary'>Recents searches</h3>")
+                // Iterate over each mobile phone object and create HTML elements
+                result.forEach(function (mobile, i) {
+                    var cardElement = $("<div>").addClass(`card p-3 m-3 m-md-2 col-sm-12 col-md-3 col-lg-3`);
+
+                    var imageElement = $("<img>").attr("src", mobile.imageUrl).addClass("card-img-top mt-3 mb-3 img-fluid");
+                    var cardBodyElement = $("<div>").addClass("card-body");
+                    var titleElement = $("<h5>").addClass("card-title").text(mobile.name);
+                    var subtitleElement = $("<h6>").addClass("card-subtitle mb-2 text-muted").text(mobile.websiteName.toUpperCase());
+                    var priceElement = $("<p>").addClass("card-text").text("Price: ₹" + mobile.price);
+                    var linkElement = $("<a>").attr("href", mobile.redirectLink).addClass("btn btn-primary").text("Buy Now");
+
+                    //$(`.div${i * 2}`).append(`<h5 class='text-secondary'>${mobile.websiteName}</h5>`)
+
+                    // Append the elements to the main container
+                    cardBodyElement.append(titleElement, priceElement, linkElement);
+                    cardElement.append(subtitleElement, imageElement, cardBodyElement);
+                    if (mobile.imageUrl)
+                        resultListElement.append(cardElement);
+                });
+            },
+            error: err => {
+                alert("Error: Server not found")
+                console.log("Error occured")
+                console.log(err)
+            }
+        })
+
+
+
+        $(document).on('submit', '#searchForm', e => {
+            e.preventDefault()
+            console.log("form submitted")
+            let category = e.target[0].value
+
+            let scrapMethod = document.getElementById('scrapMethodSelect').value
+            console.log(scrapMethod)
+            var formData = {
+                "category": category,
+                'scrapMethod': scrapMethod
+            };
+            if (category == 'flights') {
+                let source = e.target[1].value
+                let dest = e.target[2].value
+                let date = e.target[3].value
+                formData["source"] = source
+                formData["dest"] = dest
+                formData["date"] = date
+            } else {
+                searchVal = e.target[1].value
+                formData["search"] = searchVal
+            };
+            $('#resultList').html("")
+            $('#searchSubmitBtn').attr({ 'disabled': true })
+
+            console.log(formData)
+
+            // alert("Started scraping")
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'search' %}",
+                headers: {
+                    'X-CSRFToken': getCSRFToken()
+                },
+                data: formData,
+                success: res => {
+                    console.log("success")
+                    console.log(res)
+
+                    $(this).disabled = false
+
+                    var result = res.result
+                    var resultListElement = $("#resultList");
+                    $('#resultList').html("")
+                    $('#resultList').append("<h3 class='text-secondary'>Results</h3>")
+                    // Iterate over each mobile phone object and create HTML elements
+
+                    $('#searchSubmitBtn').attr({ 'disabled': false })
+
+                    result.forEach(function (mobile) {
+                        $("<div>").append(`<h5 class='text-secondary'>${mobile.websiteName}</h5>`)
+                        var cardElement = $("<div>").addClass("card p-3 m-2 col-sm-12 col-lg-4");
+                        var imageElement = $("<img>").attr("src", mobile.imageUrl).addClass("card-img-top img-fluid");
+                        var cardBodyElement = $("<div>").addClass("card-body");
+                        var titleElement = $("<h5>").addClass("card-title").text(mobile.name);
+                        var priceElement = $("<p>").addClass("card-text").text("Price: ₹" + mobile.price);
+                        var linkElement = $("<a>").attr("href", mobile.redirectLink).addClass("btn btn-primary").text("Buy Now");
+                        var subtitleElement = $("<h6>").addClass("card-subtitle mb-2 text-muted").text(mobile.websiteName);
+
+                        // Append the elements to the main container
+                        cardBodyElement.append(titleElement, priceElement, linkElement);
+                        cardElement.append(subtitleElement, imageElement, cardBodyElement);
+                        resultListElement.append(cardElement);
+                    });
+
+                    alert("Scrapping completed")
+                },
+                error: err => {
+                    $('#searchSubmitBtn').attr({ 'disabled': false })
+                    alert("Error occured")
+                    console.log("Error occured")
+                    console.log(err)
+                }
+            })
+
+        })
+
+        $('#testBtn').on('click', e => {
+            var data = {
+                'mode': 'test',
+                'mode1': 'test',
+            };
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'test' %}",
+                headers: {
+                    'X-CSRFToken': getCSRFToken()
+                },
+                data: data,
+                success: res => {
+                    console.log(res)
+                }
+            })
+        })
+
+
+        const getTodaysDate = () => {
+            var date = new Date();
+
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            return year + "-" + month + "-" + day
+        }
+
+        $('#searchCategory').on('change', e => {
+            let value = $('#searchCategory').val()
+            console.log(value)
+            $('#inputs').html('')
+            if (value === 'flights') {
+                let div = `<div style="display:flex;padding-left:2rem;gap:1rem">
+                    <select style="width:auto;outline:none;border:none" class="form-select" name="source" id="sourceSelect">
+                        <option value="DEL">Delhi</option>
+                        <option value="BOM">Mumbai</option>
+                        <option value="BKK">Bangkok</option>
+                        <option value="BLR">Banglore</option>
+                    </select>
+                    <select style="width:auto;outline:none;border:none" class="form-select" name="destination" id="destSelect">
+                        <option value="BOM">Mumbai</option>
+                        <option value="DEL">Delhi</option>
+                        <option value="BKK">Bangkok</option>
+                        <option value="BLR">Banglore</option>
+                    </select>
+                    <input style="width:auto" type="date" name="date" id="datepicker" placeholder="Select date" required>
+                </div>`
+                $('#inputs').append(div)
+                // $("#datepicker").datepicker("setDate", new Date());
+                $("#datepicker").val(getTodaysDate())
+                console.log($("#datepicker").val())
+            }
+            else
+                $('#inputs').append(`<input type="text" name="searchInp" id="" placeholder="Search anything....">`)
+        })
+        // $('#searchCategory').val('flights')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Phones</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <style>
+        #mobileList img{
+            height: 250px;
+            width:fit-content
+        }
+    </style>
+    <!-- #mobileList {
+        height: 550px;
+        width:400px
+    } -->
+</head>
+
+<body>
+    <div id="mobileList" class="container row gap-5 m-auto"></div>
+
+    <script>
+        $(document).ready(function () {
+            var result = [
+                {
+                    "price": 5999,
+                    "name": "Nokia C12 Android 12 (Go Edition) Smartphone",
+                    "imageUrl": "https://m.media-amazon.com/images/I/71I+e398pkL._AC_UY218_.jpg",
+                    "redirectLink": "/Nokia-Android-Smartphone-All-Day-Capacity/dp/B0BW5SQX18/ref=sr_1_7?keywords=mobile&qid=1687065742&sr=8-7"
+                },
+                {
+                    "price": 7299,
+                    "name": "Samsung Galaxy M04 Light Green",
+                    "imageUrl": "https://m.media-amazon.com/images/I/814ePfNubRL._AC_UY218_.jpg",
+                    "redirectLink": "/Samsung-Storage-MediaTek-Octa-core-Processor/dp/B0BMGB2TPR/ref=sr_1_1?keywords=mobile&qid=1687065742&sr=8-1"
+                },
+                {
+                    "price": 7299,
+                    "name": "Samsung Galaxy M04 Dark Blue",
+                    "imageUrl": "https://m.media-amazon.com/images/I/81t6Av5DvXL._AC_UY218_.jpg",
+                    "redirectLink": "/Samsung-Storage-MediaTek-Octa-core-Processor/dp/B0BMGB3CH9/ref=sr_1_3?keywords=mobile&qid=1687065742&sr=8-3"
+                },
+                {
+                    "price": 8799,
+                    "name": "Redmi 12C (Royal Blue",
+                    "imageUrl": "https://m.media-amazon.com/images/I/81itQPVn-GL._AC_UY218_.jpg",
+                    "redirectLink": "/Redmi-Storage-Performance-Mediatek-Display/dp/B0BYN48MQW/ref=sr_1_10?keywords=mobile&qid=1687065742&sr=8-10"
+                },
+                {
+                    "price": 13990,
+                    "name": "Samsung Galaxy M14 5G (ICY Silver",
+                    "imageUrl": "https://m.media-amazon.com/images/I/817WWpaFo1L._AC_UY218_.jpg",
+                    "redirectLink": "/Samsung-Storage-Battery-Octa-Core-Processor/dp/B0BZCSMP95/ref=sr_1_9?keywords=mobile&qid=1687065742&sr=8-9"
+                },
+                {
+                    "price": 13999,
+                    "name": "iQOO Z6 Lite 5G (Stellar Green",
+                    "imageUrl": "https://m.media-amazon.com/images/I/61VbKHdE0rL._AC_UY218_.jpg",
+                    "redirectLink": "/iQOO-Stellar-Snapdragon-Segment-Included/dp/B07WHSR1NR/ref=sr_1_6?keywords=mobile&qid=1687065742&sr=8-6"
+                },
+                {
+                    "price": 14990,
+                    "name": "Samsung Galaxy M14 5G (ICY Silver",
+                    "imageUrl": "https://m.media-amazon.com/images/I/817WWpaFo1L._AC_UY218_.jpg",
+                    "redirectLink": "/Samsung-Storage-Battery-Octa-Core-Processor/dp/B0BZCR6TNK/ref=sr_1_2?keywords=mobile&qid=1687065742&sr=8-2"
+                },
+                {
+                    "price": 14990,
+                    "name": "Samsung Galaxy M14 5G (Berry Blue",
+                    "imageUrl": "https://m.media-amazon.com/images/I/91HRACirFrL._AC_UY218_.jpg",
+                    "redirectLink": "/Samsung-Storage-Battery-Octa-Core-Processor/dp/B0BZCSNTT4/ref=sr_1_4?keywords=mobile&qid=1687065742&sr=8-4"
+                },
+                {
+                    "price": 14999,
+                    "name": "Redmi 11 Prime 5G (Thunder Black",
+                    "imageUrl": "https://m.media-amazon.com/images/I/81lAth+jv+L._AC_UY218_.jpg",
+                    "redirectLink": "/Redmi-Thunder-Storage-Dimensity-5000mAh/dp/B0BBFKGFQH/ref=sr_1_8?keywords=mobile&qid=1687065742&sr=8-8"
+                },
+                {
+                    "price": 19999,
+                    "name": "OnePlus Nord CE 3 Lite 5G (Chromatic Gray",
+                    "imageUrl": "https://m.media-amazon.com/images/I/61LB+d0vheL._AC_UY218_.jpg",
+                    "redirectLink": "/gp/bestsellers/electronics/ref=sr_bs_4_electronics_1"
+                },
+                {
+                    "price": 8095.95,
+                    "name": "Samsung Galaxy S9 | S9+ Plus 64GB 128GB 256GB - (Unlocked) Verizon T-Mobile AT&T",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/fKgAAOSwPwFioNT3/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/255573438198?epid=19016535868&hash=item3b815d2ef6:g:fKgAAOSwPwFioNT3&amdata=enc%3AAQAIAAAA4OUXGyJPOmsLEYD2EXqZxWmdhOaqQ09flHIfiYa4t6Hbvlms7RasVUgGDxJisWQDoeGfyLDxbjK570gkkp16FlOwx2IJxYiXfZfb3RS28X7NxzLoKAeqJ1LjrnWLu1QLzPea9zYk9S0DJNwBivtPMXz%2Flcdenqbq2GanowcLmi3cnlmESF41zk6Bnjp%2BtQgpIkZ52Bi2WwogSTIIQHNXG2kIILM9MmY%2FGKA6v6JVEhbqEBNS4XUq3b1Mn1UyEmkYcQMiFVzWqW%2BRmHTsLVb77odUocE9xUC8wAkQW8YL6FE1%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 8889.75,
+                    "name": "Samsung Galaxy S9 - Unlocked - Verizon T-Mobile AT&T 64GB 4G Smartphone",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/INwAAOSw3XliK~Z4/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/274614344653?epid=7024754290&hash=item3ff04a5bcd:g:INwAAOSw3XliK~Z4&amdata=enc%3AAQAIAAAA4FPiLJmWeZDgRljEp%2FIVl2t2qgziRT6ntWvlLid0%2BVkWnehe3DF%2F6mFX%2F9P%2F7qTSsW8l7M%2FCDrt%2BDg9xhmqS5oopoE%2FfD%2FHvjQDj2CowxLTp%2Biu6LxDdrGA7wdXKojDzq9b7DU1n9dXjjmzPKkszaDY6B74syxfvX5oawA1QimBWaX2K3HIIOdPT%2B4pSiMG2D6AVwUlLGboygeGndKxgIwlIHejIk%2FXr9bW%2FhK3OY31LIhQXvvjgtH5ps2VBj7bqO4jVlqwfh5EBwZWCJ8O5DhmP7cCXvHoiUGsl%2BqcqnDKH%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 11740.949999999999,
+                    "name": "Apple iPhone 8 | 8 Plus 64GB 128GB 256GB GSM Unlocked ATT T-Mobile Metro Cricket",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/tlsAAOSwCoJi8vb1/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/275419609847?epid=24052379805&hash=item402049baf7:g:tlsAAOSwCoJi8vb1&amdata=enc%3AAQAIAAAA4OdvmWpwHPf6FQDWWqGXsf6xE4uTaQo1kZSQHuJ7%2F69rWcNpTa%2BOnbejaB86gNB83agdTH%2FlHmrFt3HiI8dQyBwIaRUaQwJE8DW9dk6vsan3jCn2Z7X1ZIkVCodb%2F3ZLTHMyKaCYv7A%2BZc7Z%2FhFyV48Q%2BIcg%2BUx%2Bct1gx1hOz3TRejJegwWm0aD7HCf5nk9%2B%2Bf%2BnLbi11SekhP0Icw1N5EUW3hdBWQSBw8YwEYWJ5Z5GwtzyTf1NMujmZ%2FZ5LIHxQNLqy1rEKrvqkakFymu6qpHDgMklIjBbkyGl%2B7zV7Ju0%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 13608,
+                    "name": "Apple iPhone X - 256 GB - All Colors - Fully Unlocked - Very Good Condition",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/0osAAOSwnkxhNls4/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/114974289190?epid=14040428581&hash=item1ac5006d26:g:0osAAOSwnkxhNls4&amdata=enc%3AAQAIAAAA4Ki0ZoU0kgCkI6AokipaOulnEkLIqNsyUog6Utts9UT%2By6BtfxbW3dIdO3xU1S7a5gZ%2FoUfn8dRxdp6MLlfUYfSKbaYpzkquoNOrlioEk68DiRtRRw191l3LL1AIixW584R6%2BeRb%2Bea%2FfYbqQ%2BIOi3Qh0A26AwasVMlCubEpFYvYh0OnuOcG%2BqtO7nficBSHWjmF76Oty0eO4oCy5kCWxQnqoU2UafyovdJGS9nHwEV8VCqI44kTcC4JKL3UOOPfXSF8%2BloaKv%2BEMNZlxyM2Ug5bSxp0%2BrYQc%2B05rI%2B30i5r%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 15790.949999999999,
+                    "name": "Samsung Galaxy S21 5G 128GB 256GB - Unlocked Verizon T-Mobile AT&T Cricket Metro",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/IjMAAOSwi6VjVti~/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/275513499912?epid=25043676449&hash=item4025e26108:g:IjMAAOSwi6VjVti~&amdata=enc%3AAQAIAAAA4HwGdCUauWKvVs0l3Xo7DvluhyWBC1xJGx85eDFhj76ZeRdaWyaRKEeEa7BUzPp8d85TWNzHOXUAGNyO%2BVAdLBY9R5jGM41DEVqo%2B1EhdPOqE2n1lvxbEePyy5C9WtNNzcpxXiD6XByOdO0DPHHaSq2SW%2Bp%2BLdqrAlhUq48CXSJG%2F%2F1bDvww4A7YWGejbwBJpsFAMPHJ%2FyWNMaWYSu9UGOWBJ4pq%2FwZIU01uOh0PBPAjoUjAiRraipIlt8LEy5%2BVQkAMVUd9QB3k06HD0a%2B5scARCKGKBTN65cnpIMzV%2Bd%2FA%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 19030.95,
+                    "name": "Samsung Galaxy S21 | S21+ Plus 5G - 128GB - Unlocked | Verizon | T-Mobile | AT&T",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/PZMAAOSwOEZj~qg1/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/185795944955?epid=18043687485&hash=item2b424d21fb:g:PZMAAOSwOEZj~qg1&amdata=enc%3AAQAIAAAA4MhDpuR%2BZAKdT%2FyIdP%2BiPOraFiiNOWKXlEKKlTvpDc9L038pyg9zyrtFrRzckvg49TYHI7N72ZpttGg3bpkFze7av%2Bbw%2FyIo6BBOA5%2Bs%2BDF%2Bhyz3Fj9QSWPmBdOe%2B1B7ER7YoiZDvBwIjHEJtR2sVDDlUpR0WmOG6jS7PfV2MP7ClFSCFdiioFBBnhZDKwZ6prKEsyhG7wwsvBxJfSxIhd82TBKvpwV%2F835r%2FMinKQ38JwSuHE1mDT%2FZ%2Fwi%2BD8y1afNj%2FcV9lJawtYmKMbNSAvzpBrWFRusYiVs7xe18je3d%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 21869.190000000002,
+                    "name": "Apple iPhone 11 64GB Unlocked Verizon ATT T-Mobile GSM CDMA Smartphone A2111",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/YesAAOSwkfhhnSk5/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/265620291838?hash=item3dd83400fe:g:YesAAOSwkfhhnSk5&amdata=enc%3AAQAIAAAA4B7zimYHFc6DQFKkkTAwopBVYJoLNgiEQXYD7qypou1b%2F%2FqgGQLgMHcD%2FtcCzEvQWpseTUT7VdTiiaQBnTTANBrzxkqmk3UkUe%2BROFV69%2FQdDuKLxTrp%2BPvlJU0IBV4zU8mh1gebnYLkGzpFPh4age%2FoQO7TrG68%2BFHGmPZm25BQPeYjc4ylJZK9IWFMuiNsz2OEYKkSqfys9tRvxeUXnaASmV732nxMcDKYt1TB%2Fyma%2B9otsSJg%2BUu25yAhmQsXSo0na6lUkY8%2BrX%2FLVSvYyoF%2FThJCnKgyoRBj8TpHKI6W%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 22679.190000000002,
+                    "name": "Apple iPhone 11 64GB Unlocked Verizon ATT T-Mobile GSM CDMA Smartphone Good",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/jCIAAOSwc8thnSk3/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/255405276945?epid=22034217304&hash=item3b77573f11:g:jCIAAOSwc8thnSk3&amdata=enc%3AAQAIAAAA4NMmfNzrQq000PEb10fvNPcKRqd28%2FJfCoWqNmoSAa79Wn%2FgInLtpGLmv1MuBm2zyZ1ZeGNdWZhz7cg3DmvBNz1J2Wz7nGuNTeDTmMfTjx3JIHQr7x4nK8KHIJdLylRKr8%2BInWeYCuc5984gSyqiUCKHHWmCXWCkrNukBzCyhamdOY0ukCJ0VDWXZTj5BazQp6CPW6PIDBctXdHGsEqw%2B6TPXE8qgNWVm5JD6aZFcDLxMNW6DRWYF4gSyBL8zcHCswoXyR%2Bz1%2BOA%2F0TnxKv75jrR5ivbcMGa97TbWR316U9V%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 24299.190000000002,
+                    "name": "Apple iPhone 11 128GB 256GB A2111 Fully Unlocked AT&T T-Mobile Verizon EXCELLENT",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/Gk8AAOSwP2FkNc43/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/175686116626?epid=28057226897&hash=item28e7b56512:g:Gk8AAOSwP2FkNc43&amdata=enc%3AAQAIAAAA4BCzpcaJrOtzQyw93DctayrMSvLoKRmf22%2FUB2fHxLjVKoindrNUJk2HiLv9lYySEOF5iiDVbvT81AMo0xTVvp5rp2fmfn64qFYq7vqA8nI%2B9a8kWGxGfVKv5APeZfR8gxlHz4mFYmghZJWr%2BVKEV38b6DC4%2Fdke%2Fp3QNmKsgtQzr8LLZgguY0Vozw3fiTLebqAGwpOJKtjZWuLbWTYuChTGayRPn7Guz%2FenYsy%2B6%2F19tShpZ6sKokyPRSzVh1FBqjCzZxXAXjaepAgW8s3jxehWukDUqtxgr9k443k2wMBw%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 32803.380000000005,
+                    "name": "Apple iPhone 12 Unlocked 64GB 128GB 256GB | Verizon T-Mobile AT&T | Very Good",
+                    "imageUrl": "https://i.ebayimg.com/thumbs/images/g/ZikAAOSwYExhtmzO/s-l300.webp",
+                    "redirectLink": "https://www.ebay.com/itm/195494998246?hash=item2d8468f0e6:g:ZikAAOSwYExhtmzO&amdata=enc%3AAQAIAAAA4P9pYNOznmhIH4uZB1%2FYodBhPINMX5lJEOV5%2F%2BTqSJEfNa9FwRVPN4LUkyEHEvMfUWJ%2BW7Nm34nqFpOulxtd8UX%2Bjl8hRNuciO933KVMGlNq1v7qKb3Z7KzxNsIKefBmhzLYZgcc0%2BIKCIe5CLgedmbY34Mka2bJCPYeumZp65Lq8Oy6zFos7HxiJowh0B785AmkzlglG04Y7kgXRuehNyLRW%2Bjj7%2BZvLJ%2FtwT9kPrymAXL%2BMN3G%2FLHMEtYAFkmg4PXWgV5qAcnJmIwKs6VqZEoUuV0QmaJlBYJ01JAncaUX%7Ctkp%3ABk9SR7D_pM-ZYg"
+                },
+                {
+                    "price": 1159,
+                    "name": "Cellecor X3",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/z/i/j/x3-x3-cellecor-original-imagzyhhuxhzskd6.jpeg?q=70",
+                    "redirectLink": "/cellecor-x3/p/itmf5788783aa397?pid=MOBGZYHMPVDZ95ZD&lid=LSTMOBGZYHMPVDZ95ZDKNFOHR&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&iid=en_KrlvQ2xg84o238OjABhNArgWEoMrIm8j4cm5LkcdwTjnb4%2BPFVyYZVrWziZDNfQzk%2BwwBkac%2FngybZYGqnT2Jw%3D%3D&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 6599,
+                    "name": "REDMI A1+ (Light Blue",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/9/j/r/-original-imagjyhyaf7tdxnc.jpeg?q=70",
+                    "redirectLink": "/redmi-a1-light-blue-32-gb/p/itmae4738195e03c?pid=MOBGGYBAGFD4H23B&lid=LSTMOBGGYBAGFD4H23BT8EH5A&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_5&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGGYBAGFD4H23B.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 6599,
+                    "name": "REDMI A1+ (Light Green",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/a/9/b/-original-imagjyhyrgdtnjjy.jpeg?q=70",
+                    "redirectLink": "/redmi-a1-light-green-32-gb/p/itm7ddf6868555cf?pid=MOBGGYBA5ZHNPDQA&lid=LSTMOBGGYBA5ZHNPDQAIY89VU&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_6&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGGYBA5ZHNPDQA.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 6599,
+                    "name": "REDMI A1+ (Black",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/p/a/4/-original-imagjyhymqnhz7fm.jpeg?q=70",
+                    "redirectLink": "/redmi-a1-black-32-gb/p/itm7c286db936fbd?pid=MOBGGYBACTBNBYEG&lid=LSTMOBGGYBACTBNBYEGZKEURN&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGGYBACTBNBYEG.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 6999,
+                    "name": "POCO C51 (Royal Blue",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/6/v/0/c51-mzb0dxkin-poco-original-imagzdpycgrcdc8z.jpeg?q=70",
+                    "redirectLink": "/poco-c51-royal-blue-64-gb/p/itm1e4e8373537a7?pid=MOBGZCQFCWNDK89P&lid=LSTMOBGZCQFCWNDK89PTMGT86&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_3&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGZCQFCWNDK89P.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 7299,
+                    "name": "Infinix SMART 7 (Night Black",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/e/r/a/-original-imagna3qqyay2gaf.jpeg?q=70",
+                    "redirectLink": "/infinix-smart-7-night-black-64-gb/p/itm7b72b66485a59?pid=MOBGMTW2T7W2UPB9&lid=LSTMOBGMTW2T7W2UPB9VAZZSU&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_8&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGMTW2T7W2UPB9.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 7299,
+                    "name": "Infinix SMART 7 (Emerald Green",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/2/n/m/-original-imagna3rjqn8vqxb.jpeg?q=70",
+                    "redirectLink": "/infinix-smart-7-emerald-green-64-gb/p/itm7b72b66485a59?pid=MOBGMTW2HFCMQY35&lid=LSTMOBGMTW2HFCMQY35R7FJQZ&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_9&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGMTW2HFCMQY35.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 7299,
+                    "name": "Infinix SMART 7 (Azure Blue",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/u/c/u/-original-imagnanh2yvpc4zx.jpeg?q=70",
+                    "redirectLink": "/infinix-smart-7-azure-blue-64-gb/p/itm7b72b66485a59?pid=MOBGMTW2WYG2A2FM&lid=LSTMOBGMTW2WYG2A2FMSRLXTO&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_10&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGMTW2WYG2A2FM.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 7749,
+                    "name": "POCO C55 (Cool Blue",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/y/9/g/-original-imagnfzyhh8gz8sd.jpeg?q=70",
+                    "redirectLink": "/poco-c55-cool-blue-64-gb/p/itm166c52f5d5dc0?pid=MOBGMXSW55C7ZJE7&lid=LSTMOBGMXSW55C7ZJE7OFBLA7&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_4&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGMXSW55C7ZJE7.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                },
+                {
+                    "price": 10699,
+                    "name": "SAMSUNG Galaxy F13 (Waterfall Blue",
+                    "imageUrl": "https://rukminim1.flixcart.com/image/312/312/xif0q/mobile/0/8/4/-original-imagfhu75eupxyft.jpeg?q=70",
+                    "redirectLink": "/samsung-galaxy-f13-waterfall-blue-128-gb/p/itm85a305642eb7b?pid=MOBGENJWVWYAAVG5&lid=LSTMOBGENJWVWYAAVG5AKPCP0&marketplace=FLIPKART&q=mobile&store=tyy%2F4io&srno=s_1_2&otracker=search&otracker1=search&iid=62d63514-1178-4653-9cb4-26d38fde8b96.MOBGENJWVWYAAVG5.SEARCH&ssid=wuuji2zj7k0000001687065782684&qH=532c28d5412dd75b"
+                }
+            ]
+
+
+            var mobileListElement = $("#mobileList");
+
+            // Iterate over each mobile phone object and create HTML elements
+            result.forEach(function (mobile) {
+                var cardElement = $("<div>").addClass("card p-5 col-12 col-md-6 col-lg-3");
+                var imageElement = $("<img>").attr("src", mobile.imageUrl).addClass("card-img-top");
+                var cardBodyElement = $("<div>").addClass("card-body");
+                var titleElement = $("<h5>").addClass("card-title").text(mobile.name);
+                var priceElement = $("<p>").addClass("card-text").text("Price: ₹" + mobile.price);
+                var linkElement = $("<a>").attr("href", mobile.redirectLink).addClass("btn btn-primary").text("Buy Now");
+
+                // Append the elements to the main container
+                cardBodyElement.append(titleElement, priceElement, linkElement);
+                cardElement.append(imageElement, cardBodyElement);
+                mobileListElement.append(cardElement);
+            });
+        });
+    </script>
+</body>
+
+</html>

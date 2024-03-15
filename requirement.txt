@@ -1,0 +1,9 @@
+django
+selenium
+beautifulsoup4
+pytesseract
+Pillow
+requests
+roboflow
+
+opencv-python
